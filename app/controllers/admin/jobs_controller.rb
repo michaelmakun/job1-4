@@ -4,7 +4,16 @@ class Admin::JobsController < ApplicationController
   layout 'admin'
 
   def index
-    @jobs = Job.all
+    @jobs = case params[:order]
+    when 'job_resumes_count'
+      Job.all.sort_by {|job| job.resumes.count }.reverse
+    when 'by_lower_bound'
+      Job.all.order('wage_lower_bound DESC')
+    when 'by_upper_bound'
+      Job.all.order('wage_upper_bound DESC')
+    else
+      Job.all.recent
+    end
   end
 
   def show

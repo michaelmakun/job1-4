@@ -1,4 +1,8 @@
 <div class="pull-right">
+  <%= link_to("按照简历数量排序", admin_jobs_path( :order => "job_resumes_count" ), :class => "btn btn-info btn-xs") %>
+  <%= link_to("按照薪资下限排序", admin_jobs_path( :order => "by_lower_bound" ), :class => "btn btn-success btn-xs") %>
+  <%= link_to("按照薪资上限排序", admin_jobs_path( :order => "by_upper_bound" ), :class => "btn btn-danger btn-xs") %>
+  <%= link_to("按照发布时间排序", admin_jobs_path, :class => "btn btn-warning btn-xs") %>
   <%= link_to("增加职位", new_admin_job_path, :class => "btn btn-primary btn-xs") %>
 </div>
 
@@ -8,6 +12,9 @@
   <thead>
     <tr>
       <th>职位</th>
+      <th>收到简历数量</th>
+      <th>薪资下限</th>
+      <th>薪资上限</th>
       <th>管理选项</th>
       <th>发布时间</th>
     </tr>
@@ -19,6 +26,9 @@
           <%= render_job_status(job) %>
           <%= link_to(job.title, admin_job_path(job)) %>
         </td>
+        <td><%= link_to(job.resumes.count, admin_job_resumes_path(job)) %></td>
+        <td><%= job.wage_lower_bound %></td>
+        <td><%= job.wage_upper_bound %></td>
         <td>
           <%= link_to("编缉", edit_admin_job_path(job), :class => "btn btn-success btn-xs") %>
           <%= link_to("删除", admin_job_path(job), :method => :delete, :class => "btn btn-danger btn-xs", :data => { :confirm => "Are you sure?"}) %>
