@@ -16,7 +16,7 @@
         <td><%= link_to(job.title, job_path(job)) %></td>
         <td>
           <%= link_to("编缉", edit_job_path(job), :class => "btn btn-success btn-xs") %>
-          <%= link_to("删除", jobs_path(job), method: :delete, :class => "btn btn-danger btn-xs") %>
+          <%= link_to("删除", job_path(job), method: :delete, :class => "btn btn-danger btn-xs") %>
         </td>
         <td><%= job.created_at %></td>
       </tr>
